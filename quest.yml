@@ -1,48 +1,35 @@
-title: Funnel Drop
-description: "What’s worse than a bug? A bug that happens in the production environment!
-  \nIt affects real users, who often have pitchforks and torches and would not hesitate
-  to use them on you. Time to learn how to handle such bugs—from getting a support
-  ticket, through bug replication, to making sure it can’t bug (ha!) anyone ever again."
-summary: "Welcome to real life - where a commit on one side of the world affects users
-  on the other side. Most of the problems you’ll encounter won’t be as straightforward,
-  and we’ll first need to dive into the data to analyze what exactly the problem is.\n\nFinding
-  needles in haystacks is a crucial part of every engineer's work. No two bugs are
-  the same, but the process by which they’re eliminated often begins with cutting
-  and slicing data until we isolate the exact problem. Then we need to reproduce it
-  locally as it’s the only way to know that we are fixing the problem. Finally, it’s
-  time to fix the problem and deploy it to production. \n\nThe reproduction, by the
-  way, can be a challenge in itself, as developing on a desktop with a stable and
-  fast internet connection will give you the experience of a certain subset of your
-  users. Others might use the product on a different type of device or with very limited
-  bandwidth— circumstances that can expose bugs. Luckily, we have enough tools that
-  let us mimic different users."
+title: Dataseeding
+description: "Some think it’s not prudent to run tests or replicate bugs using production databases. Cowards!
+But as sometimes they’re bound to be the decision-makers, we need to learn how to populate a local DB with mock data. In the process, you will learn good engineering practices, which will come in handy throughout your career."
+summary: "Great success! Now we have a working system and data to play with and run tests on to see how real users experience the system.
+
+And that’s not all. From now on, every time a new user needs to use the system locally or in a brand new environment, they’ll have a seed script ready to populate the DB in seconds. Hope you’re proud because we definitely are!"
 simulations:
-- funneldrop_analyze_data
-- funneldrop_reproduce_locally
-- funneldrop_fixing_bug_pr
-duration: 1.5
+- dataseeding_add_item
+- dataseeding_script
+duration: 3
 skills:
-- frontend
-- debugging
-- observability
-- communication
+- backend
+- database
 questDependency: docker_localsetup
-slogan: It's time for...
+slogan: Venture into the database...
 messages:
   questStarted:
     person: head-of-rd
     messages:
-    - text: "https://thumbs.gfycat.com/AnguishedAngryAlaskajingle-size_restricted.gif"
+    - text: https://i.giphy.com/media/dNvaBfoxWSowUpATQW/giphy.gif
+    - text: Hey again!
       delay: 1000
-    - text: "Before you do anything else, please **run the following command** on your repo: `${scriptCommand}`, and **let me know** once you're done."
-      delay: 1300
+    - text: First thing first, please **run the following command** on your repo: `${scriptCommand}`, and **let me know** once **you're done**.
+      delay: 1600
   questStartedNotReady:
     person: head-of-rd
     messages:
-    - text: "Let me know when you are ready."
-      delay: 300
+    - text: Oh, um,\nLet me know when you're **ready** and were able to run the script - by replying here :)
+      delay: 500
+    - text: But If you run into **Anyproblems**, please email support@anythink.com, and I will make sure a member of the team reaches out to you. 
+      delay: 1400
   questFinished:
     person: head-of-rd
     messages:
-    - text: "Great job! You've fixed the bug. I’m so proud of you 😀\nWe still have a lot of work ahead of us, so [click here](${platform.home}) once you're ready for your next challenge, ok?"
-      delay: 1500
+    - text: That's it! Take a quick coffee break and [click here](${platform.home}) once you’re ready for your next project.
