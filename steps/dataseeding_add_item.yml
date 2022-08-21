@@ -1,0 +1,40 @@
+id: dataseeding_add_item
+hints:
+- Oh, OK! Maybe you should try to find the page that lets you add new items.
+- Still stuck, ah? Try to find which api route add item to the DB, and which piece of code in the frontend call it.
+startFlow:
+  do:
+  - actionId: bot_message
+    params:
+      person: head-of-rd
+      messages:
+      - text: https://i.giphy.com/media/dNvaBfoxWSowUpATQW/giphy.gif
+      - text: Hey again!
+        delay: 600
+      - text: I see your local environment is all set up, but doesn’t something feel a bit off?
+        delay: 1200
+      - text: I’ll give you a hint: your database is emptier than the office fridge after the unfortunate ferret
+        delay: 2500
+      - text: So go ahead, **add a single product to the DB,** then get to **its page** in the system to continue.
+        delay: 2000
+trigger:
+  type: local_page_load
+  flowNode:
+    if:
+      conditions:
+      - conditionId: text_match_regex
+        params:
+          text: "${path}"
+          regex: ^item
+          flags: i
+      then:
+        do:
+        - actionId: bot_message
+          params:
+            person: head-of-rd
+            messages:
+            - text: OK! Good! You have an item in the system, and that’s fantastic.
+              delay: 1500
+            - text: But why would you put ${path.slice(6)} as your first choice? Never mind, I’ll note you did that and we
+              delay: 1300
+        - actionId: finish_step
