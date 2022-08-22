@@ -13,7 +13,7 @@ startFlow:
         delay: 600
       - text: I see your local environment is all set up, but doesn’t something feel a bit off?
         delay: 1200
-      - text: I’ll give you a hint: your database is emptier than the office fridge after the unfortunate ferret
+      - text: "I’ll give you a hint: your database is emptier than the office fridge after the unfortunate ferret"
         delay: 2500
       - text: So go ahead, **add a single product to the DB,** then get to **its page** in the system to continue.
         delay: 2000
