@@ -4,8 +4,8 @@ description: |
   But as sometimes they’re bound to be the decision-makers, we need to learn how to populate a local DB with mock data. In the process, you will learn good engineering practices, which will come in handy throughout your career.
 summary: |
   Great success! Now we have a working system and data to play with and run tests on to see how real users experience the system.
-
-And that’s not all. From now on, every time a new user needs to use the system locally or in a brand new environment, they’ll have a seed script ready to populate the DB in seconds. Hope you’re proud because we definitely are!
+  
+  And that’s not all. From now on, every time a new user needs to use the system locally or in a brand new environment, they’ll have a seed script ready to populate the DB in seconds. Hope you’re proud because we definitely are!
 simulations:
 - dataseeding_add_item
 - dataseeding_script
