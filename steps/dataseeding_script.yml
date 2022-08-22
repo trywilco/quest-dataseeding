@@ -11,7 +11,7 @@ startFlow:
       - text: You know I value your time, so when I had to pick between having you seed the database with users, items and comments manually, and **using a script** - I went for the script.
       - text: It’s in the backend directory right now, waiting for you to implement it. So go ahead, say “thanks Ness”, and implement away! Let’s start with **100 users, 100 products, and 100 comments.**
         delay: 2500
-      - text: Oh, wait, there’s a note here with some details: The script, ./seeds.sh is in the backend directory. You should run it on the backend docker container, using `docker exec -it anythink-backend-${user.backend} bash`.
+      - text: "Oh, wait, there’s a note here with some details: The script, ./seeds.sh is in the backend directory. You should run it on the backend docker container, using `docker exec -it anythink-backend-${user.backend} bash`."
         delay: 7000
       - text: Once you’re done, open a PR.
         delay: 2500
