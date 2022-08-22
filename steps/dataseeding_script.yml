@@ -17,8 +17,6 @@ startFlow:
         delay: 2500
 githubActions:
   backend:
-    capabilities:
-    - seeds
     paramsFramework:     
       node:
         testFile: mongo.js
