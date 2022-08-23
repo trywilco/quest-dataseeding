@@ -16,9 +16,9 @@ startFlow:
       - text: Once you’re done, open a PR.
         delay: 2500
 githubActions:
-  capabilities:
-    -seeds
   backend:
+    capabilities:
+      - seeds
     paramsFramework:     
       node:
         testFile: mongo.js
