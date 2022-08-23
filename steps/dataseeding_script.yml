@@ -16,6 +16,8 @@ startFlow:
       - text: Once you’re done, open a PR.
         delay: 2500
 githubActions:
+  capabilities:
+    -seeds
   backend:
     paramsFramework:     
       node:
@@ -23,7 +25,7 @@ githubActions:
         cmd: mongo ${testFile}
       default:
         testFile: psql.sql
-        cmd: psql localhost/anythink-market -f ${testFile} -v ON_ERROR_STOP=1
+        cmd: psql postgresql://postgres:postgres@localhost/anythink-market -f ${testFile} -v ON_ERROR_STOP=1
       
 trigger:
   type: github_pr_lifecycle_status
