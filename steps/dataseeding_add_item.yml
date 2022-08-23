@@ -8,9 +8,6 @@ startFlow:
     params:
       person: head-of-rd
       messages:
-      - text: https://i.giphy.com/media/dNvaBfoxWSowUpATQW/giphy.gif
-      - text: Hey again!
-        delay: 600
       - text: I see your local environment is all set up, but doesn’t something feel a bit off?
         delay: 1200
       - text: "I’ll give you a hint: your database is emptier than the office fridge after the unfortunate ferret"
