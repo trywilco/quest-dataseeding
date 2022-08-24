@@ -22,7 +22,7 @@ trigger:
       - conditionId: text_match_regex
         params:
           text: "${path}"
-          regex: ^item
+          regex: ^/item/
           flags: i
       then:
         do:
