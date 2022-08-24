@@ -1,4 +1,4 @@
-id: dataseeding
+id: dataseeding_generic
 title: Dataseeding
 description: |
   Some think it’s not prudent to run tests or replicate bugs using production databases. Cowards! 
