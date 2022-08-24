@@ -20,7 +20,7 @@ githubActions:
     capabilities:
       - seeds
     testFile: psql.sql
-    cmd: psql ${DATABASE_URL} -f ${testFile} -v ON_ERROR_STOP=1
+    cmd: psql ${databaseUrl} -f ${testFile} -v ON_ERROR_STOP=1
     paramsFramework:     
       node:
         testFile: mongo.js
