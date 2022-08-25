@@ -17,14 +17,16 @@ startFlow:
         delay: 2500
 githubActions:
   backend:
-    capabilities:
-      - seeds
     testFile: psql.sql
-    cmd: psql ${databaseUrl} -f ${testFile} -v ON_ERROR_STOP=1
+    cmd:
+      - DATABASE_URL=${databaseUrl} ./seeds.sh
+      - psql ${databaseUrl} -f ${testFile} -v ON_ERROR_STOP=1
     paramsFramework:     
       node:
         testFile: mongo.js
-        cmd: mongo ${testFile}
+        cmd: 
+          - DATABASE_URL=${databaseUrl} ./seeds.sh
+          - mongo ${testFile}
 
       
 trigger:
