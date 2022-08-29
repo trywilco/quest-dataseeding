@@ -19,7 +19,7 @@ githubActions:
   backend:
     testFile: psql.sql
     cmd:
-      - /bin/bash -c "DATABASE_URL=${databaseUrl} ./seeds.sh"
+      - /bin/bash -c "MONGODB_URI=${databaseUrl} ./seeds.sh"
       - psql ${databaseUrl} -f ${testFile} -v ON_ERROR_STOP=1
     paramsFramework:     
       node:
