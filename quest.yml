@@ -1,5 +1,6 @@
 id: dataseeding
 title: Dataseeding
+level: intermediate
 description: |
   Some think it’s not prudent to run tests or replicate bugs using production databases. Cowards! 
   But as sometimes they’re bound to be the decision-makers, we need to learn how to populate a local DB with mock data. In the process, you will learn good engineering practices, which will come in handy throughout your career.
