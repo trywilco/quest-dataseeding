@@ -15,9 +15,6 @@ duration: 3
 skills:
 - backend
 - database
-learningObjectives: 
-- Manually adding an item to the DB 
-- Populating DB using a dataseeding script 
 questDependency: docker_localsetup
 solutionBranch: quest_solution/dataseeding
 slogan: Venture into the database...
