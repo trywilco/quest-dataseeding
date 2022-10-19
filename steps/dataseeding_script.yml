@@ -1,4 +1,6 @@
 id: dataseeding_script
+learningObjectives: 
+- Populating DB using a dataseeding script 
 hints:
 - Oh, OK! [Here's]( https://trywilco.notion.site/Data-seeding-f5f1a3260e8c47bd8f8cd3fcadf6b6dc) something that might help.
 - Try to find the code in the backend that creates an item in the DB and see how it creates the item on the DB.
