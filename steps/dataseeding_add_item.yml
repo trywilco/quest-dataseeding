@@ -34,6 +34,6 @@ trigger:
             messages:
             - text: OK! Good! You have an item in the system, and that’s fantastic.
               delay: 1500
-            - text: But why would you put ${Lodash.startCase(path.slice(6))} as your first choice? Never mind, I’ll note you did that and we
+            - text: But why would you put ${Lodash.startCase(Lodash.dropRight(path.slice(6).split("-")).join("-"))} as your first choice? Never mind, I’ll note you did that and we
               delay: 1300
         - actionId: finish_step
