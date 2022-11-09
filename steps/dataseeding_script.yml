@@ -3,7 +3,7 @@ learningObjectives:
 - Populating DB using a dataseeding script 
 hints:
 - Oh, OK! [Here's]( https://trywilco.notion.site/Data-seeding-f5f1a3260e8c47bd8f8cd3fcadf6b6dc) something that might help.
-- Try to find the code in the backend that creates an item in the DB and see how it creates the item on the DB.
+- Try to **find the code in the backend that creates an item in the DB** and **see how it creates the item** on the DB.
 startFlow:
   do:
   - actionId: bot_message
@@ -11,11 +11,11 @@ startFlow:
       person: head-of-rd
       messages:
       - text: You know I value your time, so when I had to pick between having you seed the database with users, items and comments manually, and **using a script** - I went for the script.
-      - text: It’s in the backend directory right now, waiting for you to implement it. So go ahead, say “thanks Ness”, and implement away! Let’s start with **100 users, 100 products, and 100 comments.**
+      - text: It’s in the backend directory right now, waiting for you to :codeInstruction[implement it]. So go ahead, say “thanks Ness”, and implement away! Let’s start with :codeInstruction[**100 users, 100 products, and 100 comments.**]
         delay: 2500
       - text: "Oh, wait, there’s a note here with some details: The script, ./seeds.sh is in the backend directory. You should run it on the backend docker container, using `docker exec -it anythink-backend-${user.backend} bash`."
         delay: 7000
-      - text: Once you’re done, open a PR.
+      - text: Once you’re done, :codeInstruction[open a PR].
         delay: 2500
 githubActions:
   backend:
@@ -42,14 +42,14 @@ trigger:
           - actionId: github_pr_comment
             params:
               person: head-of-rd
-              message: That was fast! Thanks for the PR @${user.githubuser}, I'll review the changes right away.
+              message: That was fast! I'll review the changes right away.
         github_pr_workflow_complete_success:
           do:
           - actionId: bot_message
             params:
               person: head-of-rd
               messages:
-              - text: Wonderful! Looks like there are some records in your local DB. Now you can **merge the PR** and get ready for your next assignment.
+              - text: Wonderful! Looks like there are some records in your local DB. Now you can :codeInstruction[**merge the PR**] and get ready for your next assignment.
                 delay: 1300
           - actionId: github_pr_approve
             params:
@@ -61,12 +61,14 @@ trigger:
             params:
               person: head-of-rd
               messages:
-              - text: Umm, something is off. Make sure all checks pass and only then try and merge the PR.
+              - text: Umm, something is off. **Make sure all checks pass** and only then try and merge the PR. 
+                delay: 1700
+              - text: Don't hesitate to ask for my help by admitting that you're stuck and I'm your only hope 👼
                 delay: 2500
           - actionId: github_pr_reject
             params:
               person: head-of-rd
-              message: Umm, something is off. Make sure all checks pass and only then try and merge the PR.
+              message: Umm, something is off. **Make sure all checks pass** and **only then try and merge** the PR (or you can always ask for my help on Snack).
         github_pr_merged:
           do:
           - actionId: finish_step
