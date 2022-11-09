@@ -12,9 +12,9 @@ startFlow:
       messages:
       - text: I see your local environment is all set up, but doesn’t something feel a bit off?
         delay: 1200
-      - text: I’ll give you a hint: your database is probably emptier than the office fridge after the unfortunate ferret accident.
+      - text: 'I’ll give you a hint: your database is probably emptier than the office fridge after the unfortunate ferret accident.'
         delay: 2500
-      - text: So go ahead, :codeInstruction[**add a single item to the DB**], then get to :codeInstruction[**its page**] in the system to continue.
+      - text: 'So go ahead, :codeInstruction[**add a single item to the DB**], then get to :codeInstruction[**its page**] in the system to continue.'
         delay: 2000
 trigger:
   type: local_page_load
