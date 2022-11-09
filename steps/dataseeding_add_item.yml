@@ -34,8 +34,8 @@ trigger:
             messages:
             - text: OK! Good! You have an item in the system, and that’s fantastic.
               delay: 2000
-            - text: 'But why would you put ${Lodash.startCase(Lodash.dropRight(path.slice(6).split("-")).join("-"))} as your first choice?'
+            - text: But why would you put ${Lodash.startCase(Lodash.dropRight(path.slice(6).split("-")).join("-"))} as your first choice?
               delay: 1300
-            - text: 'Nevermind that, as Anythink's motto says - "Never ask questions you don't want to know the answers to." Moving on!'
+            - text: Nevermind that, as Anythink's motto says - "Never ask questions you don't want to know the answers to." Moving on!
               delay: 1700
         - actionId: finish_step
