@@ -11,11 +11,11 @@ startFlow:
       person: head-of-rd
       messages:
       - text: I see your local environment is all set up, but doesn’t something feel a bit off?
-        delay: 1200
+        delay: 1700
       - text: 'I’ll give you a hint: your database is probably emptier than the office fridge after the unfortunate ferret accident.'
         delay: 2500
       - text: 'So go ahead, :codeInstruction[**add a single item to the DB**], then get to :codeInstruction[**its page**] in the system to continue.'
-        delay: 2000
+        delay: 2500
 trigger:
   type: local_page_load
   flowNode:
@@ -33,9 +33,9 @@ trigger:
             person: head-of-rd
             messages:
             - text: OK! Good! You have an item in the system, and that’s fantastic.
-              delay: 1500
+              delay: 2000
             - text: 'But why would you put ${Lodash.startCase(Lodash.dropRight(path.slice(6).split("-")).join("-"))} as your first choice?'
               delay: 1300
             - text: 'Nevermind that, as Anythink's motto says - "Never ask questions you don't want to know the answers to." Moving on! ✨'
-              delay: 1300
+              delay: 1700
         - actionId: finish_step
