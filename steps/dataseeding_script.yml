@@ -63,7 +63,7 @@ trigger:
               messages:
               - text: Umm, something is off. **Make sure all checks pass** and only then try and merge the PR. 
                 delay: 1700
-              - text: Don't hesitate to ask for my help by admitting that you're input[stuck]{text='I'm stuck!'} and I'm your only hope 👼'
+              - text: Don't hesitate to ask for my help by admitting that you're input[stuck]{text='I'm stuck!'} and I'm your only hope'
                 delay: 2500
           - actionId: github_pr_reject
             params:
