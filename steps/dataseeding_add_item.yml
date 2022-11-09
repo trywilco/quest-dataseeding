@@ -2,8 +2,8 @@ id: dataseeding_add_item
 learningObjectives: 
 - Manually adding an item to the DB 
 hints:
-- Oh, OK! Maybe you should try to find the page that lets you add new items.
-- Still stuck, ah? Try to find which api route add item to the DB, and which piece of code in the frontend call it.
+- Oh, OK! Maybe you should try to **find the page that lets you add new items.**
+- Still stuck, ah? Try to find **which api route add item to the DB, and which piece of code in the frontend call it.**
 startFlow:
   do:
   - actionId: bot_message
@@ -36,6 +36,6 @@ trigger:
               delay: 1500
             - text: But why would you put ${Lodash.startCase(Lodash.dropRight(path.slice(6).split("-")).join("-"))} as your first choice?
               delay: 1300
-            - text: Nevermind, as Anythink's motto says: "Never ask questions you don't want to know the answers to."
+            - text: Nevermind that, as Anythink's motto says: "Never ask questions you don't want to know the answers to." Moving on! ✨
               delay: 1300
         - actionId: finish_step
