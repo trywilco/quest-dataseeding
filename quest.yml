@@ -11,7 +11,7 @@ summary: |
 steps:
 - dataseeding_add_item
 - dataseeding_script
-duration: 3
+duration: 1
 skills:
 - backend
 - database
