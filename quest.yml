@@ -37,4 +37,9 @@ messages:
   questFinished:
     person: head-of-rd
     messages:
-    - text: That's it! Take a quick coffee break and [click here](${platform.home}) once you’re ready for your next project.
+    - text: Awesome. Now we have a working system and data to play with and run tests on, to see how real users experience the system 🙂
+      delay: 1200
+    - text: You did a great job, which means you're probably eager to start another one! What do you think? 
+      delay: 1200
+      components:
+        - type: schedule_learning_time
