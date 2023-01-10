@@ -19,21 +19,6 @@ questDependency: docker_localsetup
 solutionBranch: quest_solution/dataseeding
 slogan: Venture into the database...
 messages:
-  questStarted:
-    person: head-of-rd
-    messages:
-    - text: https://i.giphy.com/media/dNvaBfoxWSowUpATQW/giphy.gif
-    - text: Hey again!
-      delay: 1000
-    - text: "First thing first, please **run the following command** on your repo: `${scriptCommand}`, and **let me know** once **you're done**."
-      delay: 1600
-  questStartedNotReady:
-    person: head-of-rd
-    messages:
-    - text: Oh, um,\nLet me know when you're **ready** and were able to run the script - by replying here :)
-      delay: 500
-    - text: But If you run into **Anyproblems**, please email support@anythink.com, and I will make sure a member of the team reaches out to you. 
-      delay: 1400
   questFinished:
     person: head-of-rd
     messages:
