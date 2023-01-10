@@ -19,14 +19,6 @@ questDependency: docker_localsetup
 solutionBranch: quest_solution/dataseeding
 slogan: Venture into the database...
 messages:
-  questStarted:
-    person: head-of-rd
-    messages:
-    - text: https://i.giphy.com/media/dNvaBfoxWSowUpATQW/giphy.gif
-    - text: Hey again!
-      delay: 1000
-    - text: "First thing first, please **run the following command** on your repo: `${scriptCommand}`, and **let me know** once **you're done**."
-      delay: 1600
   questStartedNotReady:
     person: head-of-rd
     messages:
