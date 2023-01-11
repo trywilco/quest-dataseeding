@@ -22,4 +22,9 @@ messages:
   questFinished:
     person: head-of-rd
     messages:
-    - text: That's it! Take a quick coffee break and [click here](${platform.home}) once you’re ready for your next project.
+    - text: Good job! Now you have a working system and data to play with.
+      delay: 1400
+    - text: That's it for this task! Now it's time to select the next one on your agenda.
+      delay: 1500
+      components:
+      - type: schedule_learning_time
