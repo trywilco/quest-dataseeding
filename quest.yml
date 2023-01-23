@@ -16,7 +16,6 @@ skills:
 - backend
 - database
 questDependency: docker_localsetup
-solutionBranch: quest_solution/dataseeding
 slogan: Venture into the database...
 messages:
   questFinished:
