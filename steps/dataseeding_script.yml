@@ -14,7 +14,7 @@ startFlow:
         delay: 800
       - text: The script file, `seeds.sh`, is in the backend directory right now, waiting for you to :codeInstruction[implement it]. So go ahead, implement away! 
         delay: 1500
-      - text: The script should connect directly to the databse and seed it with :codeInstruction[**100 users, 100 products, and 100 comments.**]
+      - text: The script should connect directly to the database and seed it with :codeInstruction[**100 users, 100 products, and 100 comments.**]
         delay: 1000
       - text: "Oh, wait, there’s a note here with some details: you should run the script on the backend docker container, using `docker exec -it anythink-backend-${user.backend} bash`."
         delay: 2500
@@ -75,3 +75,21 @@ trigger:
         github_pr_merged:
           do:
           - actionId: finish_step
+
+solution:
+  do:
+    - actionId: bot_message
+      params:
+        person: head-of-rd
+      paramsFramework:
+        node:
+          messages:
+            - text: So what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data.
+            - text: "In our case, we want to fill our database with 100 different entries (sometimes referred to as \"records\") for each one of the three entities: users, items and comments."
+            - text:
+        rails:
+          messages:
+            - text:
+        python:
+          messages:
+            - text:
