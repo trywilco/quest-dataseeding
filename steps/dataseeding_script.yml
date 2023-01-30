@@ -90,9 +90,9 @@ solution:
             - text: "Now, in order to do that we first need to establish a database connection. We can look how that is done in `backend/app.js` and copy it:"
             - text: |
                 ```
-                  const mongoose = require("mongoose");
-                  const connection = process.env.MONGODB_URI;
-                  mongoose.connect(connection);
+                const mongoose = require("mongoose");
+                const connection = process.env.MONGODB_URI;
+                mongoose.connect(connection);
                 ```
             - text: "Next, it would probably be easiest to use the existing Mongoose models (`User`, `Item` and `Comment`) that are already used in the existing app code to insert 100 entries of each into the database. We should first import them:"
             - text: |
@@ -109,57 +109,51 @@ solution:
             - text: "Now let's start inserting the seed data to the database. Since we'll be using some async functions, we should put the code within an async function. Within it we could construct a 'for' loop, iterating over it 100 times, like so:"
             - text: |
                 ```
-                  async function seedDatabase() {
-                    for (let i = 0; i < 100; i++) {
-                      // add user
-                      const user = { username: = `user${i}`, email: `user${i}@gmail.com` };
-                      const options = { upsert: true, new: true };
-                      const createdUser = await User.findOneAndUpdate(user, {}, options);
-                      
-                      // add item to user
-                      const item = {
-                        slug: `slug${i}`,
-                        title: `title ${i}`,
-                        description: `description ${i}`,
-                        seller: createdUser,
-                      };
-                      const createdItem = await Item.findOneAndUpdate(item, {}, options);
-                      
-                      // add comments to item
-                      if (!createdItem?.comments?.length) {
-                        let commentIds = [];
-                        for (let j = 0; j < 100; j++) {
-                          const comment = new Comment({
-                            body: `body ${j}`,
-                            seller: createdUser,
-                            item: createdItem,
-                          });
-                          await comment.save();
-                          commentIds.push(comment._id);
-                        }
-                        createdItem.comments = commentIds;
-                        await createdItem.save();
+                async function seedDatabase() {
+                  for (let i = 0; i < 100; i++) {
+                    // add user
+                    const user = { username: = `user${i}`, email: `user${i}@gmail.com` };
+                    const options = { upsert: true, new: true };
+                    const createdUser = await User.findOneAndUpdate(user, {}, options);
+                    
+                    // add item to user
+                    const item = {
+                      slug: `slug${i}`,
+                      title: `title ${i}`,
+                      description: `description ${i}`,
+                      seller: createdUser,
+                    };
+                    const createdItem = await Item.findOneAndUpdate(item, {}, options);
+                    
+                    // add comments to item
+                    if (!createdItem?.comments?.length) {
+                      let commentIds = [];
+                      for (let j = 0; j < 100; j++) {
+                        const comment = new Comment({
+                          body: `body ${j}`,
+                          seller: createdUser,
+                          item: createdItem,
+                        });
+                        await comment.save();
+                        commentIds.push(comment._id);
                       }
+                      createdItem.comments = commentIds;
+                      await createdItem.save();
                     }
                   }
+                }
                 ```
             - text: "Finally, we can call this async function we created with a `.then()` and `.catch()` to act accordingly:"
             - text: |
                 ```
-                  seedDatabase()
-                    .then(() => {
-                    console.log("Finished DB seeding");
-                    process.exit(0);
-                  })
-                  .catch((err) => {
-                    console.log(`Error while running DB seed: ${err.message}`);
-                    process.exit(1);
-                  });
+                seedDatabase()
+                  .then(() => {
+                  console.log("Finished DB seeding");
+                  process.exit(0);
+                })
+                .catch((err) => {
+                  console.log(`Error while running DB seed: ${err.message}`);
+                  process.exit(1);
+                });
                 ```
             - text: "That should do it. You can add this code and commit the changes in a new branch and open a PR to be reviewed."
-        rails:
-          messages:
-            - text:
-        python:
-          messages:
-            - text:
