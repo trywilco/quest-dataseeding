@@ -103,19 +103,20 @@ solution:
                 ```
             - text: "Now, if we stop to think about the next step: in what order should we add these 3 entities? `items` \"belong\" to `users`, and `comments` \"belong\" to `items`. Therefore, it makes sense to add them in the following order:"
             - text: "- Add 100 `users`"
-            - text: "- Add 100 `items` that are associated to these existing `users` (could be one item for each user or 100 items for just one user)"
-            - text: "- Add 100 `comments` that are associated to these existing `items` (again, in any way we see fit as long they each are connected to an item)"
+            - text: "- Add 100 `items` that are being sold by existing `users` (could be one item for each user or 100 items for just one user)"
+            - text: "- Add 100 `comments` that are written about these existing `items` (again, in any way we see fit as long they each are connected to an item)"
             - text: "Note that we could theoretically add them in any order we want, but then we'd have to run over them again to associate the items to users and comments to items. With this suggested order we can do this in a single run."
             - text: "Now let's start inserting the seed data to the database. Since we'll be using some async functions, we should put the code within an async function. Within it we could construct a 'for' loop, iterating over it 100 times, like so:"
             - text: |
                 ```
                   async function seedDatabase() {
                     for (let i = 0; i < 100; i++) {
-                      const user = {};
-                      user.username = `user${i}`;
-                      user.email = `user${i}@gmail.com`;
+                      // add user
+                      const user = { username: = `user${i}`, email: `user${i}@gmail.com` };
                       const options = { upsert: true, new: true };
                       const createdUser = await User.findOneAndUpdate(user, {}, options);
+                      
+                      // add item to user
                       const item = {
                         slug: `slug${i}`,
                         title: `title ${i}`,
@@ -123,6 +124,8 @@ solution:
                         seller: createdUser,
                       };
                       const createdItem = await Item.findOneAndUpdate(item, {}, options);
+                      
+                      // add comments to item
                       if (!createdItem?.comments?.length) {
                         let commentIds = [];
                         for (let j = 0; j < 100; j++) {
@@ -140,6 +143,20 @@ solution:
                     }
                   }
                 ```
+            - text: "Finally, we can call this async function we created with a `.then()` and `.catch()` to act accordingly:"
+            - text: |
+                ```
+                  seedDatabase()
+                    .then(() => {
+                    console.log("Finished DB seeding");
+                    process.exit(0);
+                  })
+                  .catch((err) => {
+                    console.log(`Error while running DB seed: ${err.message}`);
+                    process.exit(1);
+                  });
+                ```
+            - text: "That should do it. You can add this code and commit the changes in a new branch and open a PR to be reviewed."
         rails:
           messages:
             - text:
