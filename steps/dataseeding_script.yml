@@ -84,9 +84,62 @@ solution:
       paramsFramework:
         node:
           messages:
-            - text: So what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data.
+            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data.
             - text: "In our case, we want to fill our database with 100 different entries (sometimes referred to as \"records\") for each one of the three entities: users, items and comments."
-            - text:
+            - text: If you'll look under the `backend/scripts` directory you'll find an empty file called `seeds.js`, which we should fill with code to seed the database.
+            - text: "Now, in order to do that we first need to establish a database connection. We can look how that is done in `backend/app.js` and copy it:"
+            - text: |
+                ```
+                  const mongoose = require("mongoose");
+                  const connection = process.env.MONGODB_URI;
+                  mongoose.connect(connection);
+                ```
+            - text: "Next, it would probably be easiest to use the existing Mongoose models (`User`, `Item` and `Comment`) that are already used in the existing app code to insert 100 entries of each into the database. We should first import them:"
+            - text: |
+                ```
+                const User = mongoose.model("User");
+                const Item = mongoose.model("Item");
+                const Comment = mongoose.model("Comment");
+                ```
+            - text: "Now, if we stop to think about the next step: in what order should we add these 3 entities? `items` \"belong\" to `users`, and `comments` \"belong\" to `items`. Therefore, it makes sense to add them in the following order:"
+            - text: "- Add 100 `users`"
+            - text: "- Add 100 `items` that are associated to these existing `users` (could be one item for each user or 100 items for just one user)"
+            - text: "- Add 100 `comments` that are associated to these existing `items` (again, in any way we see fit as long they each are connected to an item)"
+            - text: "Note that we could theoretically add them in any order we want, but then we'd have to run over them again to associate the items to users and comments to items. With this suggested order we can do this in a single run."
+            - text: "Now let's start inserting the seed data to the database. Since we'll be using some async functions, we should put the code within an async function. Within it we could construct a 'for' loop, iterating over it 100 times, like so:"
+            - text: |
+                ```
+                  async function seedDatabase() {
+                    for (let i = 0; i < 100; i++) {
+                      const user = {};
+                      user.username = `user${i}`;
+                      user.email = `user${i}@gmail.com`;
+                      const options = { upsert: true, new: true };
+                      const createdUser = await User.findOneAndUpdate(user, {}, options);
+                      const item = {
+                        slug: `slug${i}`,
+                        title: `title ${i}`,
+                        description: `description ${i}`,
+                        seller: createdUser,
+                      };
+                      const createdItem = await Item.findOneAndUpdate(item, {}, options);
+                      if (!createdItem?.comments?.length) {
+                        let commentIds = [];
+                        for (let j = 0; j < 100; j++) {
+                          const comment = new Comment({
+                            body: `body ${j}`,
+                            seller: createdUser,
+                            item: createdItem,
+                          });
+                          await comment.save();
+                          commentIds.push(comment._id);
+                        }
+                        createdItem.comments = commentIds;
+                        await createdItem.save();
+                      }
+                    }
+                  }
+                ```
         rails:
           messages:
             - text:
