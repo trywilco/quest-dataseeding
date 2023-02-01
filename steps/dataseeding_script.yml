@@ -84,7 +84,7 @@ solution:
       paramsFramework:
         node:
           messages:
-            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data.
+            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data. [Read more on this concept here](https://levelup.gitconnected.com/database-seeding-in-node-js-2b2eec5bfaa1)
             - text: "In our case, we want to fill our database with 100 different entries (sometimes referred to as \"records\") for each one of the three entities: users, items and comments."
             - text: If you'll look under the `backend/scripts` directory you'll find an empty file called `seeds.js`, which we should fill with code to seed the database.
             - text: "Now, in order to do that we first need to establish a database connection. We can look how that is done in `backend/app.js` and copy it:"
@@ -159,7 +159,7 @@ solution:
             - text: "That should do it. You can add this code and commit the changes in a new branch and open a PR to be reviewed."
         rails:
           messages:
-            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data.
+            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data. [Read more on this concept here](https://guides.rubyonrails.org/v6.1/active_record_migrations.html#migrations-and-seed-data)
             - text: "In our case, we want to fill our database with 100 different entries (sometimes referred to as \"records\") for each one of the three entities: users, items and comments."
             - text: If you'll look under the `backend/db` directory you'll find an empty file called `seeds.rb`, which we should fill with code to seed the database.
             - text: "Since ruby on rails uses `ActiveRecord` classes, and natively supports the concept seed files, we don't need to manually establish a database connection and can directly use the relevant ActiveRecord models like so:"
@@ -185,7 +185,7 @@ solution:
             - text: "That should do it. You can add this code and commit the changes in a new branch and open a PR to be reviewed."
         python:
           messages:
-            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data.
+            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data. [Read more on this concept here](https://en.wikipedia.org/wiki/Database_seeding)
             - text: "In our case, we want to fill our database with 100 different entries (sometimes referred to as \"records\") for each one of the three entities: users, items and comments."
             - text: If you'll look under the `backend/app/db` directory you'll find an empty file called `seeds.py`, which we should fill with code to seed the database.
             - text: "Now, in order to do that we first need to establish a database connection:"
