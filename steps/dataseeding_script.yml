@@ -14,7 +14,7 @@ startFlow:
         delay: 800
       - text: The script file, `seeds.sh`, is in the backend directory right now, waiting for you to :codeInstruction[implement it]. So go ahead, implement away! 
         delay: 1500
-      - text: The script should connect directly to the databse and seed it with :codeInstruction[**100 users, 100 products, and 100 comments.**]
+      - text: The script should connect directly to the database and seed it with :codeInstruction[**100 users, 100 products, and 100 comments.**]
         delay: 1000
       - text: "Oh, wait, there’s a note here with some details: you should run the script on the backend docker container, using `docker exec -it anythink-backend-${user.backend} bash`."
         delay: 2500
@@ -75,3 +75,166 @@ trigger:
         github_pr_merged:
           do:
           - actionId: finish_step
+
+solution:
+  do:
+    - actionId: bot_message
+      params:
+        person: head-of-rd
+      paramsFramework:
+        node:
+          messages:
+            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data. [Read more on this concept here](https://levelup.gitconnected.com/database-seeding-in-node-js-2b2eec5bfaa1)
+            - text: "In our case, we want to fill our database with 100 different entries (sometimes referred to as \"records\") for each one of the three entities: users, items and comments."
+            - text: If you'll look under the `backend/scripts` directory you'll find an empty file called `seeds.js`, which we should fill with code to seed the database.
+            - text: "Now, in order to do that we first need to establish a database connection. We can look how that is done in `backend/app.js` and copy it:"
+            - text: |
+                ```
+                const mongoose = require("mongoose");
+                const connection = process.env.MONGODB_URI;
+                mongoose.connect(connection);
+                ```
+            - text: "Next, it would probably be easiest to use the existing Mongoose models (`User`, `Item` and `Comment`) that are already used in the existing app code to insert 100 entries of each into the database. We should first import them:"
+            - text: |
+                ```
+                const User = mongoose.model("User");
+                const Item = mongoose.model("Item");
+                const Comment = mongoose.model("Comment");
+                ```
+            - text: "Now, if we stop to think about the next step: in what order should we add these 3 entities? `items` \"belong\" to `users`, and `comments` \"belong\" to `items`. Therefore, it makes sense to add them in the following order:"
+            - text: "- Add 100 `users`"
+            - text: "- Add 100 `items` that are being sold by existing `users` (could be one item for each user or 100 items for just one user)"
+            - text: "- Add 100 `comments` that are written about these existing `items` (again, in any way we see fit as long they each are connected to an item)"
+            - text: "Note that we could theoretically add them in any order we want, but then we'd have to run over them again to associate the items to users and comments to items. With this suggested order we can do this in a single run."
+            - text: "Now let's start inserting the seed data to the database. Since we'll be using some async functions, we should put the code within an async function. Within it we could construct a 'for' loop, iterating over it 100 times, like so:"
+            - text: |
+                ```
+                async function seedDatabase() {
+                  for (let i = 0; i < 100; i++) {
+                    // add user
+                    const user = { username: = `user${i}`, email: `user${i}@gmail.com` };
+                    const options = { upsert: true, new: true };
+                    const createdUser = await User.findOneAndUpdate(user, {}, options);
+                    
+                    // add item to user
+                    const item = {
+                      slug: `slug${i}`,
+                      title: `title ${i}`,
+                      description: `description ${i}`,
+                      seller: createdUser,
+                    };
+                    const createdItem = await Item.findOneAndUpdate(item, {}, options);
+                    
+                    // add comments to item
+                    if (!createdItem?.comments?.length) {
+                      let commentIds = [];
+                      for (let j = 0; j < 100; j++) {
+                        const comment = new Comment({
+                          body: `body ${j}`,
+                          seller: createdUser,
+                          item: createdItem,
+                        });
+                        await comment.save();
+                        commentIds.push(comment._id);
+                      }
+                      createdItem.comments = commentIds;
+                      await createdItem.save();
+                    }
+                  }
+                }
+                ```
+            - text: "Finally, we can call this async function we created with a `.then()` and `.catch()` to act accordingly:"
+            - text: |
+                ```
+                seedDatabase()
+                  .then(() => {
+                  console.log("Finished DB seeding");
+                  process.exit(0);
+                })
+                .catch((err) => {
+                  console.log(`Error while running DB seed: ${err.message}`);
+                  process.exit(1);
+                });
+                ```
+            - text: "That should do it. You can add this code and commit the changes in a new branch and open a PR to be reviewed."
+        rails:
+          messages:
+            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data. [Read more on this concept here](https://guides.rubyonrails.org/v6.1/active_record_migrations.html#migrations-and-seed-data)
+            - text: "In our case, we want to fill our database with 100 different entries (sometimes referred to as \"records\") for each one of the three entities: users, items and comments."
+            - text: If you'll look under the `backend/db` directory you'll find an empty file called `seeds.rb`, which we should fill with code to seed the database.
+            - text: "Since ruby on rails uses `ActiveRecord` classes, and natively supports the concept seed files, we don't need to manually establish a database connection and can directly use the relevant ActiveRecord models like so:"
+            - text: |
+                ```
+                User.create(email: "user@test.com", password: 'password', username: "user")
+                ```
+            - text: "Now, if we stop to think about the next step: in what order should we add these 3 entities? `items` \"belong\" to `users`, and `comments` \"belong\" to `items`. Therefore, it makes sense to add them in the following order:"
+            - text: "- Add 100 `users`"
+            - text: "- Add 100 `items` that are being sold by existing `users` (could be one item for each user or 100 items for just one user)"
+            - text: "- Add 100 `comments` that are written about these existing `items` (again, in any way we see fit as long they each are connected to an item)"
+            - text: "Note that we could theoretically add them in any order we want, but then we'd have to run over them again to associate the items to users and comments to items. With this suggested order we can do this in a single run."
+            - text: "Now let's start inserting the seed data to the database. We can use a ruby loop, iterating over it 100 times, like so:"
+            - text: |
+                ```
+                100.times do
+                  rand_part = Random.hex[0..10]
+                  user = User.create! email: "#{rand_part}@test.com", password: rand_part, username: "user#{rand_part}"
+                  item = Item.create! title: "test item #{rand_part}", description: 'amazing', user: user
+                  comment = Comment.create! user: user, item: item, body: 'a comment is here'
+                end
+                ```
+            - text: "That should do it. You can add this code and commit the changes in a new branch and open a PR to be reviewed."
+        python:
+          messages:
+            - text: Alright, what we need to do now is add what's called a `seed` script that basically "seeds" the database with some initial data. [Read more on this concept here](https://en.wikipedia.org/wiki/Database_seeding)
+            - text: "In our case, we want to fill our database with 100 different entries (sometimes referred to as \"records\") for each one of the three entities: users, items and comments."
+            - text: If you'll look under the `backend/app/db` directory you'll find an empty file called `seeds.py`, which we should fill with code to seed the database.
+            - text: "Now, in order to do that we first need to establish a database connection:"
+            - text: |
+                ```
+                from sqlalchemy import create_engine
+                import os
+                database_url = os.environ['DATABASE_URL'].replace("postgres://", "postgresql://")
+                engine = create_engine(database_url, echo=False)
+                ```
+            - text: "Now, if we stop to think about the next step: in what order should we add these 3 entities? `items` \"belong\" to `users`, and `comments` \"belong\" to `items`. Therefore, it makes sense to add them in the following order:"
+            - text: "- Add 100 `users`"
+            - text: "- Add 100 `items` that are being sold by existing `users` (could be one item for each user or 100 items for just one user)"
+            - text: "- Add 100 `comments` that are written about these existing `items` (again, in any way we see fit as long they each are connected to an item)"
+            - text: "Note that we could theoretically add them in any order we want, but then we'd have to run over them again to associate the items to users and comments to items. With this suggested order we can do this in a single run."
+            - text: "Let's prepare our sql insert statements:"
+            - text: |
+                ```
+                from sqlalchemy.sql import text
+                import random
+                import string
+                
+                user_insert_statement = text("""INSERT INTO users(username, email, salt, bio, hashed_password) VALUES(:username, :email, :salt, :bio, :hashed_password) ON CONFLICT DO NOTHING""")
+                select_last_user_id = text("""SELECT * FROM users ORDER BY id DESC LIMIT 1""")
+                item_statement = text("""INSERT INTO items(slug, title, description, seller_id) VALUES(:slug, :title, :description, :seller_id) ON CONFLICT DO NOTHING""")
+                select_last_item_id = text("""SELECT * FROM items ORDER BY id DESC LIMIT 1""")
+                comment_statement = text("""INSERT INTO comments(body, seller_id, item_id) VALUES(:body, :seller_id, :item_id) ON CONFLICT DO NOTHING""")
+                ```
+            - text: "Now let's start inserting the seed data to the database. We could construct a 'for' loop, iterating over it 100 times, like so:"
+            - text: |
+                ```
+                with engine.connect() as con:
+                  for i in range(100):
+                    
+                    random_username = f'user{i}'
+                    user = {'username': random_username, 'email':f'{random_username}@mail.com', 'salt': 'abc', 'bio': 'bio', 'hashed_password':'12345689'}
+                    con.execute(user_insert_statement, **user)
+                    
+                    result = con.execute(select_last_user_id)
+                    for row in result:
+                      generated_user_id = row['id']
+                    
+                    item = {'slug':f'slug-{random_username}', 'title':f'title{i}','description':f'desc{i}', 'seller_id':generated_user_id}
+                    con.execute(item_statement, **item)
+                    
+                    item_result = con.execute(select_last_item_id)
+                    for row in item_result:
+                      generated_item_id = row['id']
+                    comment = {'body': f'comment{i}', 'seller_id': generated_user_id, 'item_id': generated_item_id}
+                    con.execute(comment_statement, **comment)
+                ```
+            - text: "That should do it. You can add this code and commit the changes in a new branch and open a PR to be reviewed."

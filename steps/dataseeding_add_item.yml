@@ -41,3 +41,14 @@ trigger:
             - text: Nevermind that, as Anythink's motto says - "Never ask questions you don't want to know the answers to." Moving on! ✨
               delay: 1700
         - actionId: finish_step
+
+solution:
+  do:
+    - actionId: bot_message
+      params:
+        messages:
+          - text: Ok let's solve this part together. Basically what we want to do here is add a new `item` to our marketplace using the web UI, like any user of ours would.
+          - text: Start by accessing the frontend server in the browser, then click on `Sign up` at the top right (if you aren't logged in yet) and complete the form.
+          - text: You should now be logged in and able to see a `New Item` button at the top right menu. Click it.
+          - text: Add a dummy item - give it a title and description (you can leave image and tags fields blank), then click the `Publish Item` button.
+          - text: You've just added an item to the marketplace! That should be it for this step.
