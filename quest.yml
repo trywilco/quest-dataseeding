@@ -1,5 +1,5 @@
 id: dataseeding
-title: Dataseeding
+title: Populate a database with mock data to help you test things
 level: intermediate
 description: |
   Some think it’s not prudent to run tests or replicate bugs using production databases. Cowards! 
