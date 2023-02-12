@@ -46,6 +46,7 @@ solution:
   do:
     - actionId: bot_message
       params:
+        person: head-of-rd
         messages:
           - text: Ok let's solve this part together. Basically what we want to do here is add a new `item` to our marketplace using the web UI, like any user of ours would.
           - text: Start by accessing the frontend server in the browser, then click on `Sign up` at the top right (if you aren't logged in yet) and complete the form.
