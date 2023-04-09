@@ -16,7 +16,8 @@ duration: 1
 skills:
 - backend
 - database
-questDependency: docker_localsetup
+repository: https://github.com/trywilco/Anythink-Market-Public
+questDependency: null
 slogan: Venture into the database...
 messages:
   questFinished:
