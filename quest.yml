@@ -16,6 +16,9 @@ duration: 1
 skills:
 - backend
 - database
+resources:
+  - name: github
+  - name: codespaces
 repository: https://github.com/trywilco/Anythink-Market-Public
 questDependency: null
 slogan: Venture into the database...
